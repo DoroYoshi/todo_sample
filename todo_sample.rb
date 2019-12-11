@@ -18,28 +18,31 @@ class Todo
   def add(task)
     @tasks << task
     puts "＜タスクの追加＞"
-    puts "  タスクNo.#{task.id} #{task.name}:#{task.description}  を追加しました。"
+    display(task)
   end
 
   def index
     puts "＜＜タスクの一覧＞＞"
-    puts "  現在タスクはありません" if @tasks == []
+    puts "  現在、タスクはありません" if @tasks == []
     @tasks.each do |task|
-      puts "  タスクNo.#{task.id} #{task.name}:#{task.description}"
+      display(task)
     end
   end
 
   def destroy(**params)
-    delete_task = 0
-    @tasks.each do |task|
-      if task.id == params[:id]
-        @tasks = @tasks -[task]
-        delete_task = task
-      else
+    task = 0
+    @tasks.each do |task_element|
+      if task_element.id == params[:id]
+        @tasks -= [task_element]
+        task = task_element
       end
     end
     puts "＜タスクの削除＞"
-    puts "  タスクNo.#{delete_task.id} #{delete_task.name}:#{delete_task.description}  を削除しました。" 
+    display(task)
+  end
+
+  def display(task)
+    puts "  タスクNo.#{task.id} #{task.name}:#{task.description}" 
   end
 end
 
