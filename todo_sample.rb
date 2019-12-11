@@ -29,15 +29,11 @@ class Todo
     end
   end
 
-  def destroy(**params)
-    task = 0
-    @tasks.each do |task_element|
-      if task_element.id == params[:id]
-        @tasks -= [task_element]
-        task = task_element
-      end
-    end
+  def destroy(id:)
     puts "＜タスクの削除＞"
+    task = @tasks.find { |task| task.id == id }
+    return puts "  タスクNo.#{id}のタスクはありません" if task == nil
+    @tasks.delete(task)
     display(task)
   end
 
@@ -54,9 +50,10 @@ my_todo.add(task1)
 my_todo.add(task2)
 my_todo.add(task3)
 my_todo.index
-my_todo.destroy(id: 1)
-my_todo.index
+# my_todo.destroy(id: 1)
+# my_todo.index
 my_todo.destroy(id: 2)
 my_todo.index
-my_todo.destroy(id: 3)
-my_todo.index
+# my_todo.destroy(id: 3)
+# my_todo.index
+my_todo.destroy(id: 5)
