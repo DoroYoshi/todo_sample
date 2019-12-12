@@ -32,7 +32,7 @@ class Todo
   def destroy(id:)
     puts "＜タスクの削除＞"
     task = @tasks.find { |task| task.id == id }
-    return puts "  タスクNo.#{id}のタスクはありません" if task == nil
+    return puts "  タスクNo.#{id}のタスクはありません" if task.nil?
     @tasks.delete(task)
     display(task)
   end
